@@ -2,10 +2,11 @@ let firstValue = null;
 let seccondValue = null;
 let currentOpperator = null;
 
-let numberButtons = document.querySelectorAll('.number');
-let opperatorButtons = document.querySelectorAll('.opperator');
-let displayUI = document.querySelector('.display');
-let clearUI = document.querySelector('.clear');
+const numberButtons = document.querySelectorAll('.number');
+const opperatorButtons = document.querySelectorAll('.opperator');
+const displayUI = document.querySelector('.display');
+const clearUI = document.querySelector('.clear');
+const equalsUI = document.querySelector('.equals')
 
 function setNumber(event) {
     if (firstValue && currentOpperator){
@@ -24,7 +25,7 @@ function setNumber(event) {
 
 function setOpperator(event) {
     if (firstValue && seccondValue && currentOpperator) {
-        displayUI.innerHTML = opperation(firstValue, seccondValue, currentOpperator)
+        displayUI.innerHTML = opperation(firstValue, seccondValue, currentOpperator);
         firstValue = displayUI.innerHTML;
         currentOpperator = event.target.classList[1];
         seccondValue = null;
@@ -32,7 +33,7 @@ function setOpperator(event) {
     currentOpperator = event.target.classList[1];
 }
 
-function clear(event){
+function clear(){
     console.log('test')
     firstValue = null;
     seccondValue = null;
@@ -40,7 +41,14 @@ function clear(event){
     displayUI.innerHTML = '';
 }
 
+function equals(){
+    displayUI.innerHTML = opperation(firstValue, seccondValue, currentOpperator);
+    firstValue = displayUI.innerHTML;
+    seccondValue = null;
+}
+
 clearUI.addEventListener('click', clear);
+equalsUI.addEventListener('click', equals);
 
 for (let button of numberButtons) {
     button.addEventListener('click', setNumber);
