@@ -1,23 +1,46 @@
-let currentValue;
-let currentOpperator;
-let currentAnswer;
+let firstValue = null;
+let seccondValue = null;
+let currentOpperator = null;
 
 let numberButtons = document.querySelectorAll('.number');
 let opperatorButtons = document.querySelectorAll('.opperator');
 let displayUI = document.querySelector('.display');
+let clearUI = document.querySelector('.clear');
 
 function setNumber(event) {
-    displayUI.innerHTML = displayUI.innerHTML + ' ' + event.target.innerHTML;
-    currentValue = event.target.innerHTML;
-    console.log(currentValue);
+    if (firstValue && currentOpperator){
+        if (!seccondValue) {
+            displayUI.innerHTML = event.target.innerHTML;
+            seccondValue = displayUI.innerHTML;
+        } else {
+            displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
+            seccondValue = displayUI.innerHTML;
+        }
+    } else {
+        displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
+        firstValue = displayUI.innerHTML;
+    }
 }
 
 function setOpperator(event) {
-    displayUI.innerHTML = displayUI.innerHTML + ' ' + event.target.innerHTML;
+    if (firstValue && seccondValue && currentOpperator) {
+        displayUI.innerHTML = opperation(firstValue, seccondValue, currentOpperator)
+        firstValue = displayUI.innerHTML;
+        currentOpperator = event.target.classList[1];
+        seccondValue = null;
+    }
     currentOpperator = event.target.classList[1];
-    console.log(currentOpperator);
 }
 
+function clear(event){
+    console.log('test')
+    firstValue = null;
+    seccondValue = null;
+    currentOpperator = null;
+    displayUI.innerHTML = '';
+}
+
+clearUI.addEventListener('click', clear);
 
 for (let button of numberButtons) {
     button.addEventListener('click', setNumber);
@@ -44,6 +67,9 @@ function divide (numOne, numTwo) {
 }
 
 function opperation (numOne, numTwo, action) {
+    numOne = Number(numOne);
+    numTwo = Number(numTwo);
+
     switch(action) {
         case "add":
             return add(numOne, numTwo);
