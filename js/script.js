@@ -1,6 +1,31 @@
-let numOne;
-let numTwo;
-let action;
+let currentValue;
+let currentOpperator;
+let currentAnswer;
+
+let numberButtons = document.querySelectorAll('.number');
+let opperatorButtons = document.querySelectorAll('.opperator');
+let displayUI = document.querySelector('.display');
+
+function setNumber(event) {
+    displayUI.innerHTML = displayUI.innerHTML + ' ' + event.target.innerHTML;
+    currentValue = event.target.innerHTML;
+    console.log(currentValue);
+}
+
+function setOpperator(event) {
+    displayUI.innerHTML = displayUI.innerHTML + ' ' + event.target.innerHTML;
+    currentOpperator = event.target.classList[1];
+    console.log(currentOpperator);
+}
+
+
+for (let button of numberButtons) {
+    button.addEventListener('click', setNumber);
+}
+
+for (let button of opperatorButtons) {
+    button.addEventListener('click', setOpperator);
+}
 
 function add (numOne, numTwo) {
     return numOne + numTwo;
