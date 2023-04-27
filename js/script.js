@@ -42,6 +42,9 @@ function clear(){
 }
 
 function equals(){
+    if (!firstValue || !seccondValue) {
+        return
+    }
     displayUI.innerHTML = opperation(firstValue, seccondValue, currentOpperator);
     firstValue = displayUI.innerHTML;
     seccondValue = null;
