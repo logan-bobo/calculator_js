@@ -74,7 +74,7 @@ function multiply (numOne, numTwo) {
 }
 
 function divide (numOne, numTwo) {
-    return numOne / numTwo;
+    return Math.round((numOne / numTwo) * 1000) / 1000;
 }
 
 function opperation (numOne, numTwo, action) {
