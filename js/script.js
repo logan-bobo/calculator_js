@@ -1,6 +1,7 @@
 let firstValue = null;
 let seccondValue = null;
 let currentOpperator = null;
+let freeze = false;
 
 const numberButtons = document.querySelectorAll('.number');
 const opperatorButtons = document.querySelectorAll('.opperator');
@@ -33,6 +34,7 @@ function clear(){
     seccondValue = null;
     currentOpperator = null;
     displayUI.innerHTML = '';
+    freeze = false;
 }
 
 function equals(){
@@ -49,8 +51,18 @@ function placeDot(){
 }
 
 function evaluatePlacement(event){
+    if (freeze) {
+        return
+    }
+
     if (firstValue && currentOpperator){
         if (!seccondValue) {
+            if (event.target.innerHTML === '0') {
+                clear()
+                displayUI.innerHTML = 'Dont % by 0 :(';
+                freeze = true;
+                return
+            }
             displayUI.innerHTML = event.target.innerHTML;
             seccondValue = displayUI.innerHTML;
         } else {
