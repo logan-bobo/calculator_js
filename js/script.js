@@ -5,7 +5,7 @@ let freeze = false;
 
 const numberButtons = document.querySelectorAll('.number');
 const opperatorButtons = document.querySelectorAll('.opperator');
-const displayUI = document.querySelector('.display');
+const displayUI = document.querySelector('.displayText');
 const clearUI = document.querySelector('.clear');
 const equalsUI = document.querySelector('.equals');
 const backspaceUI = document.querySelector('.backspace');
@@ -60,6 +60,10 @@ function backspace(){
     }
 }
 
+function checkLength(){
+    return (displayUI.innerHTML.length < 18);
+}
+
 function evaluatePlacement(event){
     if (freeze) {
         return
@@ -73,17 +77,24 @@ function evaluatePlacement(event){
                 freeze = true;
                 return
             }
-            displayUI.innerHTML = event.target.innerHTML;
-            seccondValue = displayUI.innerHTML;
+            if (checkLength()) {
+                displayUI.innerHTML = event.target.innerHTML;
+                seccondValue = displayUI.innerHTML;
+            }
         } else {
-            displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
-            seccondValue = displayUI.innerHTML;
+            if (checkLength) {
+                displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
+                seccondValue = displayUI.innerHTML;
+            }
         }
     } else {
-        displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
-        firstValue = displayUI.innerHTML;
+        if (checkLength()) {
+            displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
+            firstValue = displayUI.innerHTML;
+        }
     }
 }
+
 clearUI.addEventListener('click', clear);
 equalsUI.addEventListener('click', equals);
 backspaceUI.addEventListener('click', backspace);

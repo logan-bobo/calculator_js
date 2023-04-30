@@ -1,0 +1,42 @@
+body {
+    font-family: 'Teko', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    min-height: 100vh;
+    background: #ABA8B2;
+    color: #4C4B63;
+}
+
+.header > h1 {
+    text-align: center;
+}
+
+.display {
+    height: 50px;
+    width: 220px;
+    margin: 15px;
+}
+
+.displayText {
+    font-size: 34px;
+    margin: 0;
+}
+
+button {
+    font-size: 20px;
+}
+
+.calculator {
+    height: 250px;
+    width: 250px;
+    border-radius: 25px;
+    background: #5386E4;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
