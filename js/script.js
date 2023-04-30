@@ -7,7 +7,8 @@ const numberButtons = document.querySelectorAll('.number');
 const opperatorButtons = document.querySelectorAll('.opperator');
 const displayUI = document.querySelector('.display');
 const clearUI = document.querySelector('.clear');
-const equalsUI = document.querySelector('.equals')
+const equalsUI = document.querySelector('.equals');
+const backspaceUI = document.querySelector('.backspace');
 
 function setNumber(event) {
     if (event.target.innerHTML === '.') {
@@ -50,6 +51,15 @@ function placeDot(){
     return (displayUI.innerHTML.length !== 0 && !displayUI.innerHTML.includes('.'))
 }
 
+function backspace(){
+    displayUI.innerHTML = displayUI.innerHTML.slice(0, (displayUI.innerHTML.length - 1))
+    if (firstValue && currentOpperator) {
+        seccondValue = displayUI.innerHTML;
+    } else {
+        firstValue = displayUI.innerHTML;
+    }
+}
+
 function evaluatePlacement(event){
     if (freeze) {
         return
@@ -76,6 +86,7 @@ function evaluatePlacement(event){
 }
 clearUI.addEventListener('click', clear);
 equalsUI.addEventListener('click', equals);
+backspaceUI.addEventListener('click', backspace);
 
 for (let button of numberButtons) {
     button.addEventListener('click', setNumber);
