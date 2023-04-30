@@ -9,17 +9,12 @@ const clearUI = document.querySelector('.clear');
 const equalsUI = document.querySelector('.equals')
 
 function setNumber(event) {
-    if (firstValue && currentOpperator){
-        if (!seccondValue) {
-            displayUI.innerHTML = event.target.innerHTML;
-            seccondValue = displayUI.innerHTML;
-        } else {
-            displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
-            seccondValue = displayUI.innerHTML;
+    if (event.target.innerHTML === '.') {
+        if (placeDot()) {
+            evaluatePlacement(event);
         }
     } else {
-        displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
-        firstValue = displayUI.innerHTML;
+        evaluatePlacement(event);
     }
 }
 
@@ -34,7 +29,6 @@ function setOpperator(event) {
 }
 
 function clear(){
-    console.log('test')
     firstValue = null;
     seccondValue = null;
     currentOpperator = null;
@@ -50,6 +44,24 @@ function equals(){
     seccondValue = null;
 }
 
+function placeDot(){
+    return (displayUI.innerHTML.length !== 0 && !displayUI.innerHTML.includes('.'))
+}
+
+function evaluatePlacement(event){
+    if (firstValue && currentOpperator){
+        if (!seccondValue) {
+            displayUI.innerHTML = event.target.innerHTML;
+            seccondValue = displayUI.innerHTML;
+        } else {
+            displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
+            seccondValue = displayUI.innerHTML;
+        }
+    } else {
+        displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
+        firstValue = displayUI.innerHTML;
+    }
+}
 clearUI.addEventListener('click', clear);
 equalsUI.addEventListener('click', equals);
 
