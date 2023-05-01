@@ -52,6 +52,10 @@ function placeDot(){
 }
 
 function backspace(){
+    if (freeze) {
+        return
+    }
+
     displayUI.innerHTML = displayUI.innerHTML.slice(0, (displayUI.innerHTML.length - 1))
     if (firstValue && currentOpperator) {
         seccondValue = displayUI.innerHTML;
@@ -61,15 +65,16 @@ function backspace(){
 }
 
 function checkLength(){
+    console.log(displayUI.innerHTML.length);
     return (displayUI.innerHTML.length < 18);
 }
 
-function evaluatePlacement(event){
+function evaluatePlacement(event) {
     if (freeze) {
         return
     }
 
-    if (firstValue && currentOpperator){
+    if (firstValue && currentOpperator) {
         if (!seccondValue) {
             if (event.target.innerHTML === '0') {
                 clear()
@@ -80,19 +85,30 @@ function evaluatePlacement(event){
             if (checkLength()) {
                 displayUI.innerHTML = event.target.innerHTML;
                 seccondValue = displayUI.innerHTML;
+            } else {
+                displayOverflow();
             }
         } else {
-            if (checkLength) {
+            if (checkLength()) {
                 displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
                 seccondValue = displayUI.innerHTML;
+            } else {
+                displayOverflow();
             }
         }
     } else {
         if (checkLength()) {
             displayUI.innerHTML = displayUI.innerHTML + event.target.innerHTML;
             firstValue = displayUI.innerHTML;
+        } else {
+            displayOverflow();
         }
     }
+}
+
+function displayOverflow () {
+    freeze = true;
+    displayUI.innerHTML = 'display overflow clear!'
 }
 
 clearUI.addEventListener('click', clear);
