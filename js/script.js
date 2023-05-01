@@ -65,7 +65,6 @@ function backspace(){
 }
 
 function checkLength(){
-    console.log(displayUI.innerHTML.length);
     return (displayUI.innerHTML.length < 18);
 }
 
